@@ -27,11 +27,26 @@ const insertWork = db.prepare(`
     VALUES (@slug, @title, @type, @description, @url, @url_text, @position)
 `);
 
+const insertImage = db.prepare(`
+    INSERT INTO images (work_id, path, position)
+    VALUES (@work_id, @path, @position)
+`);
+
 // transazione: gli inserimenti vanno a buon fine tutti insieme, oppure nessuno
 const insertAll = db.transaction(() => {
     // per ogni lavoro esegue la query con i suoi dati (le proprietà in più, come id, sono ignorate)
     works.forEach((w) => {
-        insertWork.run(w);
+        const result = insertWork.run(w);
+        const workId = result.lastInsertRowid;
+
+        w.images?.forEach((image, i) => {
+            insertImage.run({
+                work_id: workId,
+                path: image,
+                position: i + 1
+            });
+        });
+
     })
 });
 

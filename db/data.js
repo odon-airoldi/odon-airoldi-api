@@ -77,7 +77,15 @@ const works = [
         description: null,
         url: null,
         url_text: null,
-        position: 0
+        position: 0,
+        images: [
+            "/images/odon-airoldi-tenuta-casa-virginia-01.webp",
+            "/images/odon-airoldi-tenuta-casa-virginia-02.webp",
+            "/images/odon-airoldi-tenuta-casa-virginia-03.webp",
+            "/images/odon-airoldi-tenuta-casa-virginia-04.webp",
+            "/images/odon-airoldi-tenuta-casa-virginia-05.webp",
+            "/images/odon-airoldi-tenuta-casa-virginia-06.webp"
+        ]
     },
     {
         id: 12,
@@ -87,7 +95,14 @@ const works = [
         description: null,
         url: null,
         url_text: null,
-        position: 0
+        position: 0,
+        images: [
+            "/images/odon-airoldi-le-corne-01.webp",
+            "/images/odon-airoldi-le-corne-02.webp",
+            "/images/odon-airoldi-le-corne-03.webp",
+            "/images/odon-airoldi-le-corne-04.webp",
+            "/images/odon-airoldi-le-corne-05.webp"
+        ]
     },
     {
         id: 13,
@@ -97,7 +112,15 @@ const works = [
         description: null,
         url: null,
         url_text: null,
-        position: 0
+        position: 0,
+        images: [
+            "/images/odon-airoldi-nove-lune-01.webp",
+            "/images/odon-airoldi-nove-lune-02.webp",
+            "/images/odon-airoldi-nove-lune-03.webp",
+            "/images/odon-airoldi-nove-lune-04.webp",
+            "/images/odon-airoldi-nove-lune-05.webp",
+            "/images/odon-airoldi-nove-lune-06.webp"
+        ]
     },
     {
         id: 14,
@@ -107,7 +130,13 @@ const works = [
         description: null,
         url: null,
         url_text: null,
-        position: 0
+        position: 0,
+        images: [
+            "/images/odon-airoldi-eb-arredamenti-01.webp",
+            "/images/odon-airoldi-eb-arredamenti-02.webp",
+            "/images/odon-airoldi-eb-arredamenti-03.webp",
+            "/images/odon-airoldi-eb-arredamenti-04.webp"
+        ]
     },
     {
         id: 15,
@@ -117,7 +146,14 @@ const works = [
         description: null,
         url: null,
         url_text: null,
-        position: 0
+        position: 0,
+        images: [
+            "/images/odon-airoldi-formenti-01.webp",
+            "/images/odon-airoldi-formenti-02.webp",
+            "/images/odon-airoldi-formenti-03.webp",
+            "/images/odon-airoldi-formenti-04.webp",
+            "/images/odon-airoldi-formenti-05.webp"
+        ]
     },
     {
         id: 16,
@@ -127,7 +163,15 @@ const works = [
         description: null,
         url: null,
         url_text: null,
-        position: 0
+        position: 0,
+        images: [
+            "/images/odon-airoldi-jval-01.webp",
+            "/images/odon-airoldi-jval-02.webp",
+            "/images/odon-airoldi-jval-03.webp",
+            "/images/odon-airoldi-jval-04.webp",
+            "/images/odon-airoldi-jval-05.webp",
+            "/images/odon-airoldi-jval-06.webp"
+        ]
     },
     {
         id: 17,
@@ -137,7 +181,13 @@ const works = [
         description: null,
         url: null,
         url_text: null,
-        position: 0
+        position: 0,
+        images: [
+            "/images/odon-airoldi-mgs-01.webp",
+            "/images/odon-airoldi-mgs-02.webp",
+            "/images/odon-airoldi-mgs-03.webp",
+            "/images/odon-airoldi-mgs-04.webp"
+        ]
     }
 ]
 
