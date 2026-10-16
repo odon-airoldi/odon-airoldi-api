@@ -53,7 +53,12 @@ const insertAll = db.transaction(() => {
 // esegue la transazione
 insertAll();
 
-console.log("Database creato");
+// conta le righe davvero inserite nel database.
+// AS total dà un nome alla colonna, get() restituisce la riga come oggetto ({ total: 14 }), .total ne legge il valore
+const worksCount = db.prepare("SELECT COUNT(*) AS total FROM works").get().total;
+const imagesCount = db.prepare("SELECT COUNT(*) AS total FROM images").get().total;
+
+console.log(`DB creato, inseriti ${worksCount} works, e ${imagesCount} images`);
 
 // chiude il collegamento al database
 db.close();
