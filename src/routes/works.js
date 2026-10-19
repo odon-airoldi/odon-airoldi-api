@@ -37,4 +37,48 @@ router.get("/", (req, res) => {
 });
 
 
+// GET /api/works/:slug: dettaglio di un lavoro con le sue immagini
+// :slug è un parametro di percorso: per /api/works/le-corne vale "le-corne"
+router.get("/:slug", (req, res) => {
+    // valore del parametro, letto da req.params
+    const { slug } = req.params;
+
+    // il lavoro con quello slug. get() restituisce una riga sola, o undefined se non esiste.
+    // id serve per cercare le immagini, ma non verrà inviato nella risposta
+    const work = db.prepare(`
+        SELECT id, slug, title, type, description, url, url_text
+        FROM works
+        WHERE slug = @slug
+    `).get({ slug });
+
+    // lavoro inesistente: 404 Not Found. Va controllato prima di usare work.id
+    if (!work) {
+        return res.status(404).json({ error: "Work non trovato" });
+    }
+
+    // separa id dal resto dei campi: workData contiene tutto tranne id
+    const { id, ...workData } = work;
+
+    // le immagini del lavoro, nell'ordine della gallery. all() restituisce un array di righe
+    const images = db.prepare(`
+        SELECT path
+        FROM images
+        WHERE work_id = @work_id
+        ORDER BY position = 0, position, id
+    `).all({ work_id: id });
+
+    // risposta: i campi del lavoro più images come array di percorsi.
+    // map() trasforma [{ path: "…" }, …] in ["…", …]
+    const workImages = {
+        ...workData,
+        images: images.map((image) => image.path),
+    };
+
+    res.json(workImages);
+});
+
+
+
+
+
 export default router;
