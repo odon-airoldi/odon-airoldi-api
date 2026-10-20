@@ -8,7 +8,8 @@ const router = Router();
 // valori ammessi per il filtro ?type=
 const allowedTypes = ["website", "graphic"];
 
-// GET /api/works: lista dei lavori, con filtro facoltativo ?type=website | graphic
+// GET /api/works: tutti i lavori con tutti i dati (immagini comprese), con filtro facoltativo ?type=website | graphic.
+// Il portfolio la scarica una volta durante la splash: pochi KB, e i click sui lavori non aspettano altre richieste
 // "/" è relativo al punto in cui il router è collegato, quindi vale /api/works.
 // La query string (?type=…) non fa parte del percorso: Express la mette in req.query
 router.get("/", (req, res) => {
@@ -21,19 +22,43 @@ router.get("/", (req, res) => {
         return res.status(400).json({ error: "type deve essere website o graphic" });
     }
 
-    // solo i campi che servono per una lista: descrizione e immagini sono nel dettaglio.
+    // query 1: i lavori. id serve per collegarli alle immagini, ma non verrà inviato nella risposta.
     // WHERE: se @type è NULL passano tutte le righe, altrimenti solo quelle di quel tipo.
     // Ordine: prima i lavori con una position (1, 2, 3…), poi quelli a 0, per id
     // all() restituisce tutte le righe come array di oggetti
     const works = db.prepare(`
-        SELECT slug, title, type
+        SELECT id, slug, title, type, description, url, url_text
         FROM works
         WHERE @type IS NULL OR type = @type
         ORDER BY position = 0, position, id
     `).all({ type: type ?? null }); // better-sqlite3 accetta null ma non undefined
 
+    // query 2: tutte le immagini, nell'ordine della gallery (lo stesso del dettaglio).
+    // Due query in tutto, quanti che siano i lavori: una per lavoro sarebbe il problema "N+1".
+    // Senza WHERE: con ?type=website arrivano anche quelle dei graphic, inutilizzate (poche righe, va bene così)
+    const images = db.prepare(`
+        SELECT work_id, path
+        FROM images
+        ORDER BY position = 0, position, id
+    `).all();
+
+    // raggruppa le immagini per lavoro: { "8": [ {work_id, path}, … ], "9": [ … ] }.
+    // Le chiavi di un oggetto sono stringhe, ma imagesByWork[9] trova comunque "9".
+    // L'ordine dentro ogni gruppo resta quello della query
+    const imagesByWork = Object.groupBy(images, (image) => image.work_id)
+
+    // per ogni lavoro un nuovo oggetto: tutti i campi tranne id (separato nei parametri) più images.
+    // Chi non ha immagini (i website) non ha un gruppo in imagesByWork: ?? [] evita undefined.map().
+    // map() non modifica works: restituisce un nuovo array, salvato in worksImages
+    const worksImages = works.map(({ id, ...work }) => (
+        {
+            ...work,
+            images: (imagesByWork[id] ?? []).map((image) => image.path)
+        }
+    ));
+
     // invia l'array come risposta JSON
-    res.json(works);
+    res.json(worksImages);
 });
 
 
@@ -60,6 +85,9 @@ router.get("/:slug", (req, res) => {
     const { id, ...workData } = work;
 
     // le immagini del lavoro, nell'ordine della gallery. all() restituisce un array di righe
+    // query 2: tutte le immagini, nell'ordine della gallery (lo stesso del dettaglio).
+    // Due query in tutto, quanti che siano i lavori: una per lavoro sarebbe il problema "N+1".
+    // Senza WHERE: con ?type=website arrivano anche quelle dei graphic, inutilizzate (poche righe, va bene così)
     const images = db.prepare(`
         SELECT path
         FROM images
