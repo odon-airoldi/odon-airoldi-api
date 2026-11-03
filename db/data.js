@@ -4,7 +4,7 @@ const works = [
         slug: "tuttocialde",
         title: "Tuttocialde",
         type: "website",
-        description: "Restyling di uno shop nopCommerce multimarca, con un catalogo articolato e un’esperienza d’acquisto pensata per facilitare la navigazione tra prodotti e offerte. Ho riprogettato UX e UI e sviluppato il front-end responsive in HTML, CSS e JavaScript, integrandolo nelle view Razor del tema.",
+        description: "Restyling dello shop nopCommerce multimarca, con un catalogo articolato e un’esperienza d’acquisto pensata per facilitare la navigazione tra categorie e marche. Ho riprogettato UX/UI e sviluppato il front-end responsive in HTML, CSS e JS, integrandolo nelle view Razor del tema.",
         url_text: "www.tuttocialde.it",
         url: "https://www.tuttocialde.it",
         position: 0
@@ -14,7 +14,7 @@ const works = [
         slug: "caffe-agostani",
         title: "Caffè Agostani",
         type: "website",
-        description: "Progettazione e sviluppo di uno shop nopCommerce dedicato al singolo brand. Ho definito un’esperienza d’acquisto coerente con l’identità visiva di Caffè Agostani e realizzato l’interfaccia responsive in HTML, CSS e JavaScript, integrandola nei template del tema.",
+        description: "Progettazione e sviluppo di uno shop nopCommerce dedicato al singolo brand. Ho definito un’esperienza d’acquisto coerente con l’identità visiva di Caffè Agostani e realizzato l’interfaccia responsive in HTML, CSS e JS, integrandola nei template del tema.",
         url_text: "www.caffeagostani.com",
         url: "https://www.caffeagostani.com",
         position: 0
@@ -24,7 +24,7 @@ const works = [
         slug: "cialda-mia",
         title: "Cialda Mia",
         type: "website",
-        description: "Restyling dello shop nopCommerce, con interventi sull’interfaccia e sul percorso d’acquisto per rendere la navigazione più chiara e funzionale. Ho sviluppato il front-end responsive in HTML, CSS e JavaScript e l’ho integrato nei template del tema.",
+        description: "Restyling dello shop nopCommerce, con interventi sull’interfaccia e sul percorso d’acquisto per rendere la navigazione più chiara e funzionale. Ho sviluppato il front-end responsive in HTML, CSS e JS e l’ho integrato nei template del tema.",
         url_text: "www.cialdamia.it",
         url: "https://www.cialdamia.it",
         position: 0
@@ -35,7 +35,7 @@ const works = [
         title: "Run Club",
         type: "website",
         description: "Web app full-stack realizzata come progetto finale del corso Boolean, con front-end in React e back-end in Laravel. Ho implementato la comunicazione tramite API REST, l’autenticazione con Sanctum e la struttura dei dati in MySQL, definendo modelli e relazioni con Eloquent e organizzando gli endpoint secondo il pattern MVC.",
-        url_text: "Repo on Github",
+        url_text: "Repo on GitHub",
         url: "https://github.com/odon-airoldi/run-club-api",
         position: 0
     },
